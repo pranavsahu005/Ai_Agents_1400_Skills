@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HexAtom AI Lab | Mega-Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #030712;
+            --card-bg: rgba(17, 24, 39, 0.7);
+            --accent: #6366f1;
+            --accent-glow: rgba(99, 102, 241, 0.3);
+            --text-primary: #f9fafb;
+            --text-secondary: #9ca3af;
+            --border: rgba(255, 255, 255, 0.1);
+            --glass: blur(12px) saturate(180%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(139, 92, 246, 0.05) 0%, transparent 50%);
+        }
+
+        h1, h2, h3 {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 5rem;
+            position: relative;
+        }
+
+        .logo-sphere {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--accent), #8b5cf6);
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            filter: blur(10px);
+            opacity: 0.8;
+            animation: pulse 4s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); filter: blur(10px); }
+            50% { transform: scale(1.1); filter: blur(20px); }
+        }
+
+        .title {
+            font-size: 4rem;
+            letter-spacing: -0.02em;
+            background: linear-gradient(to bottom, #fff, #9ca3af);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.25rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--text-primary);
+        }
+
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 2rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(99, 102, 241, 0.4);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 20px var(--accent-glow);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        }
+
+        .card-tag {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            color: #fff;
+        }
+
+        .card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-badge {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            padding: 0.25rem 0.75rem;
+            border-radius: 99px;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover .skill-badge {
+            background: rgba(99, 102, 241, 0.1);
+            color: #fff;
+            border-color: rgba(99, 102, 241, 0.2);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #10b981;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 0.5rem;
+            box-shadow: 0 0 10px #10b981;
+        }
+
+        .card-footer {
+            margin-top: auto;
+            padding-top: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px solid var(--border);
+        }
+
+        .card-link {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        @media (max-width: 768px) {
+            .title { font-size: 2.5rem; }
+            .container { padding: 2rem 1rem; }
+        }
+
+        /* Category Glows */
+        .card.engineering:hover { --accent: #3b82f6; }
+        .card.design:hover { --accent: #ec4899; }
+        .card.security:hover { --accent: #ef4444; }
+        .card.intelligence:hover { --accent: #10b981; }
+        .card.saas:hover { --accent: #f59e0b; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo-sphere"></div>
+            <h1 class="title">HexAtom AI Lab</h1>
+            <p class="subtitle">Autonomous Experimental Environment powered by 1,400+ Agentic Skills. Built for the future of AI-native engineering.</p>
+        </header>
+
+        <h2 class="section-title">Core Operations</h2>
+        <div class="grid">
+            <a href="HEXATOM_WORKFLOW.md" class="card intelligence">
+                <div>
+                    <div class="card-tag">Start Here</div>
+                    <h3>New Agent Induction</h3>
+                    <p>MANDATORY for all new AI sessions. Ensures deep understanding of rules and skill locations.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="card-link">Start Induction &rarr;</span>
+                    <span class="status-dot"></span>
+                </div>
+            </a>
+
+            <a href=".agent/rules/AI_AGENT_MANIFESTO.md" class="card intelligence">
+                <div>
+                    <div class="card-tag">Core Personality</div>
+                    <h3>Master AI Manifesto</h3>
+                    <p>The definitive engineering protocol for @pranavsahu005. Anti-loop, high-fidelity, and strategic initialization.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="card-link">Read Manifesto &rarr;</span>
+                    <span class="status-dot"></span>
+                </div>
+            </a>
+
+            <div class="card saas">
+                <div>
+                    <div class="card-tag">Workflow</div>
+                    <h3>Initialization Protocol</h3>
+                    <p>MANDATORY: Mind Map &rarr; Side Map &rarr; Role Map &rarr; PRD/UI/DB. Read skills first!</p>
+                </div>
+                <div class="card-footer">
+                    <span class="card-link">Follow Protocol &rarr;</span>
+                    <span class="status-dot"></span>
+                </div>
+            </div>
+
+            <a href="LAB_MANUAL.md" class="card intelligence">
+                <div>
+                    <div class="card-tag">Governance</div>
+                    <h3>Lab Operations Manual</h3>
+                    <p>Master protocols for orchestrating 6+ concurrent agents and "God Mode" development cycles.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="card-link">View Protocols &rarr;</span>
+                    <span class="status-dot"></span>
+                </div>
+            </a>
+
+            <a href="Expriments/index.html" class="card engineering">
+                <div>
+                    <div class="card-tag">Workspace</div>
+                    <h3>Experiment Index</h3>
+                    <p>Access all active laboratory experimental files, source code, and historical logs.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="card-link">Enter Lab &rarr;</span>
+                    <span class="status-dot"></span>
+                </div>
+            </a>
+
+            <a href="AI-Lab-Skills/antigravity-awesome-skills/README.md" class="card design">
+                <div>
+                    <div class="card-tag">Library</div>
+                    <h3>Mega-Skill Registry</h3>
+                    <p>Browse the catalog of 1,425+ specialized agentic skills integrated into this lab.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="card-link">Browse Skills &rarr;</span>
+                    <span class="status-dot"></span>
+                </div>
+            </a>
+        </div>
+
+        <h2 class="section-title">Power Skill Categories</h2>
+        <div class="grid">
+            <!-- 1. AI Engineering -->
+            <div class="card engineering">
+                <div>
+                    <div class="card-tag">Category 01</div>
+                    <h3>AI Engineering Toolkit</h3>
+                    <p>Production-grade SDLC patterns, code audit protocols, and refactoring engines.</p>
+                    <div class="skill-list">
+                        <span class="skill-badge">ai-engineer</span>
+                        <span class="skill-badge">code-reviewer</span>
+                        <span class="skill-badge">refactor-clean</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Autonomous Agents -->
+            <div class="card intelligence">
+                <div>
+                    <div class="card-tag">Category 02</div>
+                    <h3>Autonomous Patterns</h3>
+                    <p>Hierarchical agent memory, multi-agent task orchestration, and BDI mental states.</p>
+                    <div class="skill-list">
+                        <span class="skill-badge">agent-orchestrator</span>
+                        <span class="skill-badge">multi-agent-brainstorm</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. UI/UX Pro Max -->
+            <div class="card design">
+                <div>
+                    <div class="card-tag">Category 03</div>
+                    <h3>UI/UX Intelligence</h3>
+                    <p>High-end visual design reasoning, 3D web experiences, and component scaffolding.</p>
+                    <div class="skill-list">
+                        <span class="skill-badge">uipro-cli</span>
+                        <span class="skill-badge">3d-web-experience</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Security & Red Teaming -->
+            <div class="card security">
+                <div>
+                    <div class="card-tag">Category 04</div>
+                    <h3>Red-Team Security</h3>
+                    <p>Advanced penetration testing, security audit checklists, and malware analysis.</p>
+                    <div class="skill-list">
+                        <span class="skill-badge">security-auditor</span>
+                        <span class="skill-badge">pentest-checklist</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. Data & ML -->
+            <div class="card engineering">
+                <div>
+                    <div class="card-tag">Category 05</div>
+                    <h3>Data & ML Pipelines</h3>
+                    <p>Automated data cleaning, model training workflows, and ML-ops integration.</p>
+                    <div class="skill-list">
+                        <span class="skill-badge">ml-engineer</span>
+                        <span class="skill-badge">data-pipeline</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. SaaS & MVP Launcher -->
+            <div class="card saas">
+                <div>
+                    <div class="card-tag">Category 06</div>
+                    <h3>SaaS Launcher</h3>
+                    <p>Micro-SaaS templates, monetization strategies, and MVP rapid-deployment kits.</p>
+                    <div class="skill-list">
+                        <span class="skill-badge">micro-saas-launcher</span>
+                        <span class="skill-badge">saas-mvp</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 7. Knowledge Extraction -->
+            <div class="card intelligence">
+                <div>
+                    <div class="card-tag">Category 07</div>
+                    <h3>Knowledge Graph</h3>
+                    <p>BDistill knowledge extraction, project query engines, and architectural rationale.</p>
+                    <div class="skill-list">
+                        <span class="skill-badge">graphify</span>
+                        <span class="skill-badge">knowledge-extraction</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 8. Product Management -->
+            <div class="card saas">
+                <div>
+                    <div class="card-tag">Category 08</div>
+                    <h3>Product Management</h3>
+                    <p>User research frameworks, stakeholder mapping, and roadmap generation.</p>
+                    <div class="skill-list">
+                        <span class="skill-badge">pm-skills</span>
+                        <span class="skill-badge">product-manager</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 9. SEO & Marketing -->
+            <div class="card design">
+                <div>
+                    <div class="card-tag">Category 09</div>
+                    <h3>Agentic SEO</h3>
+                    <p>LLM-first SEO analysis, content cluster generation, and authority building.</p>
+                    <div class="skill-list">
+                        <span class="skill-badge">ai-seo</span>
+                        <span class="skill-badge">content-planner</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 10. Automation & MCP -->
+            <div class="card engineering">
+                <div>
+                    <div class="card-tag">Category 10</div>
+                    <h3>Cloud Automation</h3>
+                    <p>Terraform patterns, AWS/GCP serverless workflows, and MCP tool building.</p>
+                    <div class="skill-list">
+                        <span class="skill-badge">mcp-builder</span>
+                        <span class="skill-badge">terraform-skill</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

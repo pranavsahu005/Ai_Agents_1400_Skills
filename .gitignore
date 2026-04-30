@@ -1,0 +1,14 @@
+node_modules/
+.env
+.DS_Store
+dist/
+build/
+*.log
+graphify-out/cache/
+graphify-out/manifest.json
+graphify-out/cost.json
+.kiro/
+.zencoder/
+.zenflow/
+# Keep skills but maybe ignore their internal git history if we want
+# AI-Lab-Skills/**/.git
