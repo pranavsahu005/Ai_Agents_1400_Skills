@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trickle AI - Unified Creative Intelligence Workspace</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Inter:wght@100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Outfit:wght@100..900&family=Quicksand:wght@300;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- TailwindCSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Outfit', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+            script: ['Dancing Script', 'cursive'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="../src/styles.css" />
+
+  <!-- React & ReactDOM (Development versions via CDN for in-browser execution) -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+  <!-- Babel (for in-browser JSX compilation) -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <!-- Fabric.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script>
+
+  <!-- IndexedDB Wrapper -->
+  <script src="https://cdn.jsdelivr.net/npm/idb@7/build/umd.js"></script>
+</head>
+<body class="bg-gray-100 overflow-hidden m-0 p-0 text-gray-900 w-screen h-screen">
+  <div id="root" class="w-full h-full relative"></div>
+
+  <!-- Load Utils first -->
+  <script type="text/babel" src="../src/utils/storageHelpers.js"></script>
+  <script type="text/babel" src="../src/utils/smartNodes.js"></script>
+  <script type="text/babel" src="../src/utils/fabricHelpers.js"></script>
+
+  <!-- Load Components -->
+  <script type="text/babel" src="../src/components/BoardGallery.js"></script>
+  <script type="text/babel" src="../src/components/ModeToggle.js"></script>
+  <script type="text/babel" src="../src/components/NodePanel.js"></script>
+  <script type="text/babel" src="../src/components/FloatingToolbar.js"></script>
+  <script type="text/babel" src="../src/components/Canvas.js"></script>
+  <script type="text/babel" src="../src/components/HabitTracker.js"></script>
+  <script type="text/babel" src="../src/components/DailyPlanner.js"></script>
+  <script type="text/babel" src="../src/components/DrawingTool.js"></script>
+
+  <!-- Load App -->
+  <script type="text/babel" src="../src/App.js"></script>
+  <script type="text/babel" src="../src/index.js"></script>
+</body>
+</html>
