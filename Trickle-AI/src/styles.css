@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Core Theme Variables */
+:root {
+  /* Default Aurora Theme */
+  --bg-color: #0f172a;
+  --text-color: #f8fafc;
+  --panel-bg: rgba(30, 41, 59, 0.7);
+  --panel-border: rgba(255, 255, 255, 0.1);
+  --accent-1: #c084fc; /* purple */
+  --accent-2: #2dd4bf; /* teal */
+  --canvas-grid: rgba(255,255,255,0.03);
+}
+
+.theme-daylight {
+  --bg-color: #fdfbf7;
+  --text-color: #1e293b;
+  --panel-bg: rgba(255, 255, 255, 0.8);
+  --panel-border: rgba(0, 0, 0, 0.05);
+  --accent-1: #f59e0b;
+  --accent-2: #ef4444;
+  --canvas-grid: rgba(0,0,0,0.03);
+}
+
+.theme-ocean {
+  --bg-color: #001e3c;
+  --text-color: #e0f2fe;
+  --panel-bg: rgba(2, 44, 84, 0.7);
+  --panel-border: rgba(56, 189, 248, 0.2);
+  --accent-1: #38bdf8;
+  --accent-2: #818cf8;
+  --canvas-grid: rgba(56,189,248,0.05);
+}
+
+/* Glassmorphism Utilities */
+.glass-panel {
+  background: var(--panel-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--panel-border);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+}
+
+.glass-pill {
+  border-radius: 9999px;
+  background: var(--panel-bg);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--panel-border);
+  box-shadow: 0 10px 40px -10px rgba(0,0,0,0.3);
+}
+
+/* Custom Scrollbar for panels */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(150, 150, 150, 0.3);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(150, 150, 150, 0.5);
+}
+
+/* Grid Background for Canvas Container */
+.canvas-container-wrapper {
+  background-color: var(--bg-color);
+  background-image:
+    linear-gradient(var(--canvas-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--canvas-grid) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+/* Node Animations */
+@keyframes popIn {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.node-pop-in {
+  animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* Flowing dash animation for connectors */
+@keyframes flowDash {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+
+.connector-flow {
+  animation: flowDash 1s linear infinite;
+}
